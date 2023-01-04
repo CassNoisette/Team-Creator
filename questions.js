@@ -2,7 +2,7 @@
 const fs = require ('fs');
 
 // inquirer module
-const inquirer= require ('inquirer');
+const inquirer = require('inquirer');
 
 // Team profiles
 const Employee= require('./js/employee');
@@ -49,8 +49,8 @@ const createTeam = () => {
             {
                 type:'list',
                 name:'role',
-                message:'what is the employee role?'
-                choices: ['Employee, Engineer, Intern, Manager']
+                message:'what is the employee role?',
+                choices: ['Employee, Engineer, Intern, Manager'],
             },
         ])
         .then((answers)=>{
