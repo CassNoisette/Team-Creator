@@ -2,7 +2,7 @@
 const fs = require ('fs');
 
 // inquirer module
-const inquirer = require('inquirer');
+const inquirer = require ('inquirer');
 
 // Team profiles
 const Employee= require('./js/employee');
@@ -14,6 +14,7 @@ const Manager=require('./js/manager');
 const employee =[];
 const enginner= [];
 const intern=[];
+const teamArray = [];
 
 
 // create new team member
@@ -29,11 +30,13 @@ const createTeam = () => {
         question();
     }
   else {
-    module.exports = employee;
-    module.exports = engineer;
-    module.exports = intern;
-    module.exports = manager;
-    deleteHTML();
+    module.exports = Employee;
+    module.exports = Engineer;
+    module.exports = Intern;
+    module.exports = Manager;
+    // deleteHTML();
+ 
+    console.log(answers)
     return answers;
 
   }
@@ -47,7 +50,7 @@ const createTeam = () => {
     const question = () => {
         inquirer.prompt ([
             {
-                type:'list',
+                type:'input',
                 name:'role',
                 message:'what is the employee role?',
                 choices: ['Employee, Engineer, Intern, Manager'],
@@ -232,7 +235,27 @@ const managerQuestions = () => {
  });
 };
 
-function htmlBuilder (){
-    console.log ("Team Member Profile Created")
-    fs.writeFileSync
+const writeFile = info => {
+fs.writeFile ('./dist/Team.html', info, err =>{
+if (err) {
+    console.log(err);
+    return;
 }
+else{
+    console.log ("Team profile created!")
+}
+})
+}
+
+
+newEmployee()
+  .then(newEngineer)
+  .then(teamArray => {
+    return generateHTML(teamArray);
+  })
+  .then(pageHTML => {
+    return writeFile(pageHTML);
+  })
+  .catch(err => {
+ console.log(err);
+  });
